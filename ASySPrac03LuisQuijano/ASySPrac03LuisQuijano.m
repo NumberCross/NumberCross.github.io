@@ -1,0 +1,73 @@
+%% Práctica 3: Señales en tiempo discreto
+% Quijano Gutiérrez Luis Humberto
+%
+%% Objetivos
+% * Manipulación básica de MATLAB
+% * Gráficas de señales reales y complejas discretas
+% * Transformación de señales discretas (escalamiento y traslación)
+% * Calculo de energía y potencia de señales discretas
+%
+%% Introducción
+% Los escalamientos horizontales de una señal son operaciones que alteran
+% la señal de manera horizontal. Las operaciones que realizan estas
+% alteraciones son: 
+% * Compresión: sea una señal x[n] a la cual se le hara una compresión por
+% un factor M, entonces la señal queda de la siguiente forma: x[Mn].
+% 
+% <<introduccion1.png>>
+%
+% <<introduccion2.png>>
+%
+% * Expansión: sea la misma señal x[n] a la cual se le aplicará una
+% expansión dividindola por un factor M, quedando la señal de la siguiente
+% forma: x[n/M].
+%
+% <<introduccion3.png>>
+%
+% * Inversión: sea una nueva señal y[n] a la que se le aplicará una
+% inversión horizontal, quedando la señal de la siguiente forma: x[-n].
+%
+% <<introduccion4.png>>
+%
+% <<introduccion5.png>>
+%
+% * Inversión y compresión: sea la misma y[n] a la que se le aplicará una
+% inversión y compresión de factor M, quedando la señal de la siguiente
+% forma: y[-Mn].
+%
+% <<introduccion6.png>>
+%
+% * Inversión y expansión: sea la misma señal y[n] a la que se le aplicará
+% una invesión y expansión de factor M, quedando la señal de la siguiente
+% forma: x[-n/M].
+%
+% <<introduccion7.png>>
+%
+%% Problema 1
+% <include>fun1.m</include>
+%
+%% Problema 2
+% <include>parte2.m</include>
+%
+% <<parte2.png>>
+%
+%% Problema 3
+%  NtoR2(n,real(fn(n)),imag(fn(n)),'Problema 3')
+%
+% <<parte3.png>>
+%
+%% Problema 4
+% <include>energiadis.m</include>
+%
+%% Problema 5
+n=-3:3;
+xn=[-9 -6 -3 0 3 6 9];
+energiadis(n,xn)
+%% Problema 6
+% 
+% <<parte6_1.png>>
+%
+% <<parte6_2.png>>
+%
+%% Referencias
+% B. P. Lathi. (2005). Linear Systems and Signals. 198 Madison Avenue, New York, New York 10016: Oxford University Press.

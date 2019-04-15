@@ -1,0 +1,172 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Pr&aacute;ctica 3: Se&ntilde;ales en tiempo discreto</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-04-15"><meta name="DC.source" content="ASySPrac03LuisQuijano.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Pr&aacute;ctica 3: Se&ntilde;ales en tiempo discreto</h1><!--introduction--><p>Quijano Guti&eacute;rrez Luis Humberto</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Objetivos</a></li><li><a href="#2">Introducci&oacute;n</a></li><li><a href="#3">Problema 1</a></li><li><a href="#4">Problema 2</a></li><li><a href="#5">Problema 3</a></li><li><a href="#6">Problema 4</a></li><li><a href="#7">Problema 5</a></li><li><a href="#8">Problema 6</a></li><li><a href="#9">Referencias</a></li></ul></div><h2 id="1">Objetivos</h2><div><ul><li>Manipulaci&oacute;n b&aacute;sica de MATLAB</li><li>Gr&aacute;ficas de se&ntilde;ales reales y complejas discretas</li><li>Transformaci&oacute;n de se&ntilde;ales discretas (escalamiento y traslaci&oacute;n)</li><li>Calculo de energ&iacute;a y potencia de se&ntilde;ales discretas</li></ul></div><h2 id="2">Introducci&oacute;n</h2><p>Los escalamientos horizontales de una se&ntilde;al son operaciones que alteran la se&ntilde;al de manera horizontal. Las operaciones que realizan estas alteraciones son: * Compresi&oacute;n: sea una se&ntilde;al x[n] a la cual se le hara una compresi&oacute;n por un factor M, entonces la se&ntilde;al queda de la siguiente forma: x[Mn].</p><p><img vspace="5" hspace="5" src="introduccion1.png" alt=""> </p><p><img vspace="5" hspace="5" src="introduccion2.png" alt=""> </p><div><ul><li>Expansi&oacute;n: sea la misma se&ntilde;al x[n] a la cual se le aplicar&aacute; una expansi&oacute;n dividindola por un factor M, quedando la se&ntilde;al de la siguiente forma: x[n/M].</li></ul></div><p><img vspace="5" hspace="5" src="introduccion3.png" alt=""> </p><div><ul><li>Inversi&oacute;n: sea una nueva se&ntilde;al y[n] a la que se le aplicar&aacute; una inversi&oacute;n horizontal, quedando la se&ntilde;al de la siguiente forma: x[-n].</li></ul></div><p><img vspace="5" hspace="5" src="introduccion4.png" alt=""> </p><p><img vspace="5" hspace="5" src="introduccion5.png" alt=""> </p><div><ul><li>Inversi&oacute;n y compresi&oacute;n: sea la misma y[n] a la que se le aplicar&aacute; una inversi&oacute;n y compresi&oacute;n de factor M, quedando la se&ntilde;al de la siguiente forma: y[-Mn].</li></ul></div><p><img vspace="5" hspace="5" src="introduccion6.png" alt=""> </p><div><ul><li>Inversi&oacute;n y expansi&oacute;n: sea la misma se&ntilde;al y[n] a la que se le aplicar&aacute; una invesi&oacute;n y expansi&oacute;n de factor M, quedando la se&ntilde;al de la siguiente forma: x[-n/M].</li></ul></div><p><img vspace="5" hspace="5" src="introduccion7.png" alt=""> </p><h2 id="3">Problema 1</h2><pre class="language-matlab">
+<span class="keyword">function</span> [fn] = fun1(omega,a)
+r=2;
+n=3;
+fn=(r.^a).*cos(omega.*n)+(r.^a).*sin(omega.*n)*j;
+<span class="keyword">end</span>
+
+</pre><h2 id="4">Problema 2</h2><pre class="language-matlab">
+n=-2:10;
+a=0.9;
+xn=@(n) n.*a.*heaviside(n);
+NtoR(n,xn(n),<span class="string">'Parte 2'</span>, <span class="string">'x[n]'</span>);
+
+</pre><p><img vspace="5" hspace="5" src="parte2.png" alt=""> </p><h2 id="5">Problema 3</h2><pre>NtoR2(n,real(fn(n)),imag(fn(n)),'Problema 3')</pre><p><img vspace="5" hspace="5" src="parte3.png" alt=""> </p><h2 id="6">Problema 4</h2><pre class="language-matlab">
+<span class="keyword">function</span> [energia] = energiadis(tiempo,alturas)
+energia=sum(alturas.^2);
+NtoR(tiempo,alturas,<span class="string">'Energ&iacute;a'</span>,<span class="string">'x[n]'</span>);
+<span class="keyword">end</span>
+
+</pre><h2 id="7">Problema 5</h2><pre class="codeinput">n=-3:3;
+xn=[-9 -6 -3 0 3 6 9];
+energiadis(n,xn)
+</pre><pre class="codeoutput">
+ans =
+
+   252
+
+</pre><img vspace="5" hspace="5" src="ASySPrac03LuisQuijano_01.png" alt=""> <h2 id="8">Problema 6</h2><p><img vspace="5" hspace="5" src="parte6_1.png" alt=""> </p><p><img vspace="5" hspace="5" src="parte6_2.png" alt=""> </p><h2 id="9">Referencias</h2><p>B. P. Lathi. (2005). Linear Systems and Signals. 198 Madison Avenue, New York, New York 10016: Oxford University Press.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Práctica 3: Señales en tiempo discreto
+% Quijano Gutiérrez Luis Humberto
+%
+%% Objetivos
+% * Manipulación básica de MATLAB
+% * Gráficas de señales reales y complejas discretas
+% * Transformación de señales discretas (escalamiento y traslación)
+% * Calculo de energía y potencia de señales discretas
+%
+%% Introducción
+% Los escalamientos horizontales de una señal son operaciones que alteran
+% la señal de manera horizontal. Las operaciones que realizan estas
+% alteraciones son: 
+% * Compresión: sea una señal x[n] a la cual se le hara una compresión por
+% un factor M, entonces la señal queda de la siguiente forma: x[Mn].
+% 
+% <<introduccion1.png>>
+%
+% <<introduccion2.png>>
+%
+% * Expansión: sea la misma señal x[n] a la cual se le aplicará una
+% expansión dividindola por un factor M, quedando la señal de la siguiente
+% forma: x[n/M].
+%
+% <<introduccion3.png>>
+%
+% * Inversión: sea una nueva señal y[n] a la que se le aplicará una
+% inversión horizontal, quedando la señal de la siguiente forma: x[-n].
+%
+% <<introduccion4.png>>
+%
+% <<introduccion5.png>>
+%
+% * Inversión y compresión: sea la misma y[n] a la que se le aplicará una
+% inversión y compresión de factor M, quedando la señal de la siguiente
+% forma: y[-Mn].
+%
+% <<introduccion6.png>>
+%
+% * Inversión y expansión: sea la misma señal y[n] a la que se le aplicará
+% una invesión y expansión de factor M, quedando la señal de la siguiente
+% forma: x[-n/M].
+%
+% <<introduccion7.png>>
+%
+%% Problema 1
+% <include>fun1.m</include>
+%
+%% Problema 2
+% <include>parte2.m</include>
+%
+% <<parte2.png>>
+%
+%% Problema 3
+%  NtoR2(n,real(fn(n)),imag(fn(n)),'Problema 3')
+%
+% <<parte3.png>>
+%
+%% Problema 4
+% <include>energiadis.m</include>
+%
+%% Problema 5
+n=-3:3;
+xn=[-9 -6 -3 0 3 6 9];
+energiadis(n,xn)
+%% Problema 6
+% 
+% <<parte6_1.png>>
+%
+% <<parte6_2.png>>
+%
+%% Referencias
+% B. P. Lathi. (2005). Linear Systems and Signals. 198 Madison Avenue, New York, New York 10016: Oxford University Press.
+##### SOURCE END #####
+--></body></html>
