@@ -1,0 +1,231 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Pr&aacute;ctica 4: Convoluci&oacute;n y correlaci&oacute;n de se&ntilde;ales en tiempo continuo y tiempo discreto</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-05-07"><meta name="DC.source" content="ASySPrac04LuisQuijano.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Pr&aacute;ctica 4: Convoluci&oacute;n y correlaci&oacute;n de se&ntilde;ales en tiempo continuo y tiempo discreto</h1><!--introduction--><p>Quijano Guti&eacute;rrez Luis Humberto</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Objetivos</a></li><li><a href="#2">Introducci&oacute;n</a></li><li><a href="#3">Problema 1</a></li><li><a href="#4">Problema 2</a></li><li><a href="#5">Problema 3</a></li><li><a href="#6">Problema 4</a></li><li><a href="#7">Problema 5</a></li><li><a href="#8">Referencias</a></li></ul></div><h2 id="1">Objetivos</h2><div><ul><li>Conocer m&eacute;todos b&aacute;sicos de integraci&oacute;n num&eacute;rica</li><li>Manipulaci&oacute;n de instrucciones en MATLAB</li><li>Simular convoluciones y correlaciones de se&ntilde;ales continuas</li><li>Simular convoluciones y correlaciones de se&ntilde;ales discretas</li></ul></div><h2 id="2">Introducci&oacute;n</h2><p><b>Convoluci&oacute;n:</b></p><p>Por definici&oacute;n, la convoluci&oacute;n es la integral de menos infinito a infinito del producto de dos se&ntilde;ales, una de ellas invertida y trasladada. La convoluci&oacute;n posee varias propiedades:</p><div><ul><li>Conmutatividad</li><li>Asociatividad</li><li>Distributividad</li></ul></div><p>entre otras, pero estas son las m&aacute;s aplicadas.</p><p>Para realizar una convoluci&oacute;n se tienen varios m&eacute;todos, los cuales se van a mostrar a continuaci&oacute;n:</p><p><i>M&eacute;todo anal&iacute;tico:</i></p><p>Se tiene dos se&ntilde;ales: <img src="ASySPrac04LuisQuijano_eq07827392141393009791.png" alt="$$f(t) = e^{-t}*u(t) - e^{t}*u(-t)$"> y <img src="ASySPrac04LuisQuijano_eq18096429337834465365.png" alt="$$g(t) = u(t)$">. Para el m&eacute;todo anal&iacute;tico se debe tener las expresiones anal&iacute;ticas de las se&ntilde;ales. Una vez que se tengan las expresiones anal&iacute;ticas, si se quiere hacer la convoluci&oacute;n de <img src="ASySPrac04LuisQuijano_eq00056896545538452140.png" alt="$$f(t)*g(t)$">, se sustitulle en <img src="ASySPrac04LuisQuijano_eq05723924989662342209.png" alt="$$f(t)$"> la <img src="ASySPrac04LuisQuijano_eq14111331164838700452.png" alt="$$t$"> por <img src="ASySPrac04LuisQuijano_eq14352263042261585259.png" alt="$$\tau$">, quedando <img src="ASySPrac04LuisQuijano_eq01193823598963660600.png" alt="$$f(\tau)$">; y en <img src="ASySPrac04LuisQuijano_eq00600435893248723249.png" alt="$$g(t)$"> se sustitulle <img src="ASySPrac04LuisQuijano_eq14111331164838700452.png" alt="$$t$"> por <img src="ASySPrac04LuisQuijano_eq03696739608592721213.png" alt="$$(t-\tau)$">, quedando <img src="ASySPrac04LuisQuijano_eq17846901291543851528.png" alt="$$g(t-\tau)$">. Se aplican propiedades de intragrales para separar la integral en una suma de integrales (si es posible) y, una vez realizada la sustituci&oacute;n, se tiene que realizar una interpretaci&oacute;n para determinar cuando sobrevive la convoluci&oacute;n.</p><p><img vspace="5" hspace="5" src="introduccion1.png" alt=""> </p><p><img vspace="5" hspace="5" src="introduccion2.png" alt=""> </p><p><i>M&eacute;todo semigr&aacute;fico:</i></p><p>Este m&eacute;todo nos sirve para encontrar los l&iacute;mites de integraci&oacute;n de la convoluci&oacute;n.  De igual forma, se deben tener dos se&ntilde;ales <img src="ASySPrac04LuisQuijano_eq05723924989662342209.png" alt="$$f(t)$"> y <img src="ASySPrac04LuisQuijano_eq00600435893248723249.png" alt="$$g(t)$">. A la se&ntilde;al <img src="ASySPrac04LuisQuijano_eq05723924989662342209.png" alt="$$f(t)$"> se le sustituye por <img src="ASySPrac04LuisQuijano_eq01193823598963660600.png" alt="$$f(\tau)$"> y queda la misma geometr&iacute;a, la unica diferencia es el nombre del eje horizontal. Para la se&ntilde;al <img src="ASySPrac04LuisQuijano_eq00600435893248723249.png" alt="$$g(t)$"> se sustituye por <img src="ASySPrac04LuisQuijano_eq17846901291543851528.png" alt="$$g(t-\tau)$">, pero, para que se facilite la convoluci&oacute;n, primero se invierte la se&ntilde;al y luego se empieza a trasladar.</p><p><img vspace="5" hspace="5" src="introduccion1.png" alt=""> </p><p><img vspace="5" hspace="5" src="introduccion3.png" alt=""> </p><p>Para este m&eacute;todo, se tiene que realizar por casos, y cada caso corresponde a un cambio en la f&oacute;rmula de las se&ntilde;ales. A continuaci&oacute;n, se muestra una animaci&oacute;n de como se ve gr&aacute;ficamente una convoluci&oacute;n, en este caso se realiz&oacute; de <img src="ASySPrac04LuisQuijano_eq12145136127952465584.png" alt="$$-5$"> a <img src="ASySPrac04LuisQuijano_eq12541758297931292772.png" alt="$$5$">, por practicidad. Notese que la convoluci&oacute;n cambia de forma cuando <img src="ASySPrac04LuisQuijano_eq17846901291543851528.png" alt="$$g(t-\tau)$"> entra en la segunda f&oacute;rmula de <img src="ASySPrac04LuisQuijano_eq01193823598963660600.png" alt="$$f(\tau)$">:</p><p><img vspace="5" hspace="5" src="introduccion1.gif" alt=""> </p><p><b>Correlaci&oacute;n:</b></p><p>Por definici&oacute;n, la convoluci&oacute;n es la integral de menos infinito a infinito del producto de dos se&ntilde;ales, una de ellas trasladada. A diferencia de la convoluci&oacute;n, la correlaci&oacute;n no conmuta, es decir, no es lo mismo la correlaci&oacute;n de <img src="ASySPrac04LuisQuijano_eq05723924989662342209.png" alt="$$f(t)$"> con <img src="ASySPrac04LuisQuijano_eq00600435893248723249.png" alt="$$g(t)$"> que la correlaci&oacute;n de <img src="ASySPrac04LuisQuijano_eq00600435893248723249.png" alt="$$g(t)$"> con <img src="ASySPrac04LuisQuijano_eq05723924989662342209.png" alt="$$f(t)$">. Hay 3 definiciones para realizar la corelaci&oacute;n:</p><div><ul><li><img src="ASySPrac04LuisQuijano_eq12635915449639252558.png" alt="$$\int_{-\infty}^{\infty}f(t+\tau)g(\tau)$"></li><li><img src="ASySPrac04LuisQuijano_eq14839605456529903713.png" alt="$$\int_{-\infty}^{\infty}f(\tau)g(\tau-t)$"></li><li>Mediante la convoluci&oacute;n de <img src="ASySPrac04LuisQuijano_eq17429614163269047796.png" alt="$$f(t)*g(-t)$"></li></ul></div><p><i>M&eacute;todo anal&iacute;tico:</i></p><p>Este m&eacute;todo es muy similiar al de convoluci&oacute;n ya que se necesitan las expresiones anal&iacute;ticas de las se&ntilde;ales, la unica diferencia es la sustituci&oacute;n de la variabe t, ya sea <img src="ASySPrac04LuisQuijano_eq09781216315803130379.png" alt="$$f(t+\tau)$"> y <img src="ASySPrac04LuisQuijano_eq00909255168484029151.png" alt="$$g(\tau)$"> o <img src="ASySPrac04LuisQuijano_eq01193823598963660600.png" alt="$$f(\tau)$"> y <img src="ASySPrac04LuisQuijano_eq00867933534018281275.png" alt="$$g(\tau-t)$">; estas parejas de sustituciones son equivalentes siempre y cuando se respeten dichas parejas. Una vez realizada la sustituci&oacute;n, se aplican propiedades de las integrales para separar la integral en varias integrales y luego se realiza la interpretaci&oacute;n para ver cuando sobrevive la correlaci&oacute;n y cuando no.</p><p><img vspace="5" hspace="5" src="introduccion4.png" alt=""> </p><p><img vspace="5" hspace="5" src="introduccion5.png" alt=""> </p><p><i>M&eacute;todo semigr&aacute;fico:</i></p><p>Los pasos a seguir en el m&eacute;todo gr&aacute;fico son los siguientes:</p><div><ol><li>Dibujar <img src="ASySPrac04LuisQuijano_eq01193823598963660600.png" alt="$$f(\tau)$"> y <img src="ASySPrac04LuisQuijano_eq00909255168484029151.png" alt="$$g(\tau)$"></li><li>Agregar un "$$-t$" en cada cambio de f&oacute;rmula de <img src="ASySPrac04LuisQuijano_eq01193823598963660600.png" alt="$$f(\tau)$"></li><li>Se traslada <img src="ASySPrac04LuisQuijano_eq01193823598963660600.png" alt="$$f(\tau)$"> de tal forma que se obtenga <img src="ASySPrac04LuisQuijano_eq05082960896200466555.png" alt="$$f(t+\tau)g(\tau)$"></li><li>Encontrar los valores de <img src="ASySPrac04LuisQuijano_eq14352263042261585259.png" alt="$$\tau$"></li><li>Se encuentran los valores de <img src="ASySPrac04LuisQuijano_eq14111331164838700452.png" alt="$$t$"> de tal manera que los valores encontrados de <img src="ASySPrac04LuisQuijano_eq14352263042261585259.png" alt="$$\tau$"> sean validos</li><li>Se repiten los pasos 4, 5 y 6 para todos los valores de t reales</li></ol></div><p><i>Correlaci&oacute;n mediante convoluci&oacute;n:</i></p><p>Para este m&eacute;todo se toma en cuenta la propiedad de que la correlaci&oacute;n es la convoluci&oacute;n de la primera se&ntilde;al con la inversi&oacute;n horizontal de la segunda, <img src="ASySPrac04LuisQuijano_eq17429614163269047796.png" alt="$$f(t)*g(-t)$">, y se realizan los pasos de una convoluci&oacute;n.</p><p><img vspace="5" hspace="5" src="introduccion6.png" alt=""> </p><p><img vspace="5" hspace="5" src="introduccion7.gif" alt=""> </p><h2 id="3">Problema 1</h2><p><img vspace="5" hspace="5" src="problema1_1.png" alt=""> </p><p><img vspace="5" hspace="5" src="problema1.gif" alt=""> </p><p><img vspace="5" hspace="5" src="problema1_2.png" alt=""> </p><h2 id="4">Problema 2</h2><p><img vspace="5" hspace="5" src="problema2_1.png" alt=""> </p><p><img vspace="5" hspace="5" src="problema1.gif" alt=""> </p><p><img vspace="5" hspace="5" src="problema2_2.png" alt=""> </p><h2 id="5">Problema 3</h2><p><img vspace="5" hspace="5" src="problema3.gif" alt=""> </p><h2 id="6">Problema 4</h2><p>En este problema se realiz&oacute; la correlaci&oacute;n de la se&ntilde;al f(t) con la se&ntilde;al g(t) mediante la convoluci&oacute;n. En este m&eacute;todo, se invierte la segunda se&ntilde;al, en este caso g(t). Como dicha se&ntilde;al es simetrica, si la invertimos queda igual a la original, por lo tanto la correlaci&oacute;n es igual a la convoluci&oacute;n.</p><p><img vspace="5" hspace="5" src="problema4.gif" alt=""> </p><h2 id="7">Problema 5</h2><pre class="language-matlab">
+n=-3:3;
+x=[-9 -6 -3 0 3 6 9];
+h=[0 4 2 0 2 4 0];
+c=conv(x,h);
+nmin=-(length(x)+length(h)-2)/2;
+nmax=(length(x)+length(h)-2)/2;
+nt=nmin:nmax;
+stem(nt,c)
+
+</pre><p><img vspace="5" hspace="5" src="problema5.png" alt=""> </p><h2 id="8">Referencias</h2><p>Lathi, B. P., (2005). Linear Systems and Signals. EUA: Oxford university Press</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Práctica 4: Convolución y correlación de señales en tiempo continuo y tiempo discreto
+% Quijano Gutiérrez Luis Humberto
+%
+%% Objetivos
+% * Conocer métodos básicos de integración numérica
+% * Manipulación de instrucciones en MATLAB
+% * Simular convoluciones y correlaciones de señales continuas
+% * Simular convoluciones y correlaciones de señales discretas
+%
+%% Introducción
+% *Convolución:*
+%
+% Por definición, la convolución es la integral de menos infinito a
+% infinito del producto de dos señales, una de ellas invertida y trasladada.
+% La convolución posee varias propiedades:
+%
+% * Conmutatividad
+% * Asociatividad
+% * Distributividad
+%
+% entre otras, pero estas son las más aplicadas.
+%
+% Para realizar una convolución se tienen varios métodos, los cuales se van
+% a mostrar a continuación:
+%
+% _Método analítico:_
+%
+% Se tiene dos señales: $$f(t) = e^{-t}*u(t) - e^{t}*u(-t)$ y $$g(t) = u(t)$.
+% Para el método analítico se debe tener las expresiones analíticas de las
+% señales. Una vez que se tengan las expresiones analíticas, si se quiere
+% hacer la convolución de $$f(t)*g(t)$, se sustitulle en $$f(t)$ la $$t$ por $$\tau$,
+% quedando $$f(\tau)$; y en $$g(t)$ se sustitulle $$t$ por $$(t-\tau)$, quedando
+% $$g(t-\tau)$.
+% Se aplican propiedades de intragrales para separar la integral en una
+% suma de integrales (si es posible) y, una vez realizada la sustitución,
+% se tiene que realizar una interpretación para determinar cuando sobrevive
+% la convolución.
+%
+% <<introduccion1.png>>
+%
+% <<introduccion2.png>>
+% 
+% _Método semigráfico:_
+%
+% Este método nos sirve para encontrar los límites de integración de la
+% convolución.  De igual forma, se deben tener dos señales $$f(t)$ y $$g(t)$. A
+% la señal $$f(t)$ se le sustituye por $$f(\tau)$ y queda la misma geometría, la
+% unica diferencia es el nombre del eje horizontal. Para la señal $$g(t)$ se
+% sustituye por $$g(t-\tau)$, pero, para que se facilite la convolución,
+% primero se invierte la señal y luego se empieza a trasladar. 
+%
+% <<introduccion1.png>>
+%
+% <<introduccion3.png>>
+%
+% Para este método, se tiene que realizar por casos, y cada caso corresponde a un
+% cambio en la fórmula de las señales. A continuación, se muestra una
+% animación de como se ve gráficamente una convolución, en este caso se
+% realizó de $$-5$ a $$5$, por practicidad. Notese que la convolución cambia de
+% forma cuando $$g(t-\tau)$ entra en la segunda fórmula de $$f(\tau)$:
+%
+% <<introduccion1.gif>>
+%
+% *Correlación:*
+%
+% Por definición, la convolución es la integral de menos infinito a
+% infinito del producto de dos señales, una de ellas trasladada.
+% A diferencia de la convolución, la correlación no conmuta, es decir, no
+% es lo mismo la correlación de $$f(t)$ con $$g(t)$ que la correlación de
+% $$g(t)$
+% con $$f(t)$.
+% Hay 3 definiciones para realizar la corelación:
+%
+% * $$\int_{-\infty}^{\infty}f(t+\tau)g(\tau)$
+% * $$\int_{-\infty}^{\infty}f(\tau)g(\tau-t)$
+% * Mediante la convolución de $$f(t)*g(-t)$
+%
+% _Método analítico:_
+%
+% Este método es muy similiar al de convolución ya que se necesitan las expresiones analíticas de las señales, la unica diferencia es la sustitución
+% de la variabe t, ya sea $$f(t+\tau)$ y $$g(\tau)$ o $$f(\tau)$ y $$g(\tau-t)$; estas
+% parejas de sustituciones son equivalentes siempre y cuando se respeten
+% dichas parejas. Una vez realizada la sustitución, se aplican propiedades
+% de las integrales para separar la integral en varias integrales y luego
+% se realiza la interpretación para ver cuando sobrevive la correlación y
+% cuando no.
+%
+% <<introduccion4.png>>
+%
+% <<introduccion5.png>>
+%
+% _Método semigráfico:_
+%
+% Los pasos a seguir en el método gráfico son los siguientes:
+%
+% # Dibujar $$f(\tau)$ y $$g(\tau)$
+% # Agregar un "$$-t$" en cada cambio de fórmula de $$f(\tau)$
+% # Se traslada $$f(\tau)$ de tal forma que se obtenga $$f(t+\tau)g(\tau)$
+% # Encontrar los valores de $$\tau$
+% # Se encuentran los valores de $$t$ de tal manera que los valores
+% encontrados de $$\tau$ sean validos
+% # Se repiten los pasos 4, 5 y 6 para todos los valores de t reales
+%
+% _Correlación mediante convolución:_
+%
+% Para este método se toma en cuenta la propiedad de que la correlación es
+% la convolución de la primera señal con la inversión horizontal de la
+% segunda, $$f(t)*g(-t)$, y se realizan los pasos de una convolución.
+%
+% <<introduccion6.png>>
+%
+% <<introduccion7.gif>>
+%
+%% Problema 1
+%
+% <<problema1_1.png>>
+%
+% <<problema1.gif>>
+%
+% <<problema1_2.png>>
+% 
+%% Problema 2
+% 
+% <<problema2_1.png>>
+%
+% <<problema1.gif>>
+%
+% <<problema2_2.png>>
+%
+%% Problema 3
+% 
+% <<problema3.gif>>
+%
+%% Problema 4
+% En este problema se realizó la correlación de la señal f(t) con la señal
+% g(t) mediante la convolución. En este método, se invierte la segunda
+% señal, en este caso g(t). Como dicha señal es simetrica, si la
+% invertimos queda igual a la original, por lo tanto la correlación es
+% igual a la convolución.
+%
+% <<problema4.gif>>
+%
+%% Problema 5
+% <include>problema5.m</include>
+%
+% <<problema5.png>>
+%
+%% Referencias
+% Lathi, B. P., (2005). Linear Systems and Signals. EUA: Oxford university Press
+##### SOURCE END #####
+--></body></html>
