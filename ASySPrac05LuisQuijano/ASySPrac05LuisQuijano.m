@@ -1,0 +1,97 @@
+%% Práctica 5: Series de Fourier en tiempo continuo
+% Quijano Gutiérrez Luis Humberto
+%
+%% Objetivos
+% * Realizar gráficas de series de Fourier exponenciales y trigonométricas en tiempo continuo
+% * Manipulación de instrucciones en MATLAB
+% * Calculo númerico de los coeficientes de Fourier
+%
+%% Introducción
+% Las series de Fourier son una forma de representar señales y/o fórumas en
+% una serie infinita de combinciones líneales de esta. A los componentes
+% que forman la series se les llama coeficientes de Fourier. Hay varios
+% métodos para obtener las series de Fourier, pero del que se le va hablar
+% es el de exponencial compleja. La fórmula para obtener la serie mediante
+% la exponencial compleja es la siguiente:
+% 
+% 
+% $$Dn=\frac{1}{T_0} \int_{T_0}x(t)e^{-jnw_0t}dt$$
+%
+% $$=\lim_{T\rightarrow \:
+% 0}\frac{1}{N_0T}\sum_{k=0}^{N_0-1}x(kT)e^{-jnw_0kT}T$
+%
+% $$==\lim_{T\rightarrow \: 0}\frac{1}{N_0}\sum_{k=0}^{N_0-1}x(kT)e^{-jn\Omega_0k}$
+%
+% en donde $$x(kT)$$ es la k-ésima muestra de $$x(t)$,
+% $$N_0=\frac{T}{T_0}$ y $$\Omega_0 = \omega_0T = \frac{2\pi}{N_0}$
+%
+% Entonces, para obtener los valores de los coeficientes $$D_n$ se requiere
+% que $$ T \rightarrow \: 0$, pero eso en la práctica no es posible,
+% entonces lo que se hace es hacer que $$T$ sea un número tan pequeño, sin
+% ser cero, que no altere la fórmula y así poder determinar el
+% comportamiento como si $$T$ fuese cero. Quedando la sigueinte fórmula:
+%
+% $$D_n=\frac{1}{N_0}\sum_{k=0}^{N_0-1}x(kT)e^{-jn\Omega_0k}$
+% 
+% 
+%% Problema 1 
+%
+% * |Serie de Fourier con 4 armónicos| *
+%
+% <<problema11.png>>
+%
+% * |Serie de Fourier con 15 armónicos| *
+%
+% <<problema12.png>>
+%
+%% Problema 2
+%
+% * |Serie de Fourier con 4 armónicos| *
+%
+% <<problema2.png>>
+%
+% * |Serie de Fourier con 15 armónicos| *
+%
+% <<problema2_2.png>>
+%
+%% Problema 3
+%
+% * |Serie de Fourier con 4 armónicos| *
+%
+% <<problema3.png>>
+%
+% * |Serie de Fourier con 15 armónicos| *
+%
+% <<problema3_2.png>>
+%
+%% Problema 4
+%
+% * |Serie de Fourier con 4 armónicos| *
+%
+% <<problema1.png>>
+%
+% * |Serie de Fourier con 15 armónicos| *
+%
+% <<problema1_2.png>>
+%
+%% Problema 5
+%
+% * |Serie de Fourier con 4 armónicos| *
+%
+% <<problema51.png>>
+%
+% * |Serie de Fourier con 15 armónicos| *
+%
+% <<problema5.png>>
+%
+%% Problema 6
+%
+%% Problema 7
+% 
+% <<problema7.png>>
+%
+% <<problema7_2.png>>
+%
+%% Referencias
+% Lathi, B. P., (2005). Linear Systems and Signals. EUA: Oxford university Press
+%

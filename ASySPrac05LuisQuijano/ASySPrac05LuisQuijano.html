@@ -1,0 +1,169 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Pr&aacute;ctica 5: Series de Fourier en tiempo continuo</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-05-14"><meta name="DC.source" content="ASySPrac05LuisQuijano.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Pr&aacute;ctica 5: Series de Fourier en tiempo continuo</h1><!--introduction--><p>Quijano Guti&eacute;rrez Luis Humberto</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Objetivos</a></li><li><a href="#2">Introducci&oacute;n</a></li><li><a href="#3">Problema 1</a></li><li><a href="#4">Problema 2</a></li><li><a href="#5">Problema 3</a></li><li><a href="#6">Problema 4</a></li><li><a href="#7">Problema 5</a></li><li><a href="#8">Problema 6</a></li><li><a href="#9">Problema 7</a></li><li><a href="#10">Referencias</a></li></ul></div><h2 id="1">Objetivos</h2><div><ul><li>Realizar gr&aacute;ficas de series de Fourier exponenciales y trigonom&eacute;tricas en tiempo continuo</li><li>Manipulaci&oacute;n de instrucciones en MATLAB</li><li>Calculo n&uacute;merico de los coeficientes de Fourier</li></ul></div><h2 id="2">Introducci&oacute;n</h2><p>Las series de Fourier son una forma de representar se&ntilde;ales y/o f&oacute;rumas en una serie infinita de combinciones l&iacute;neales de esta. A los componentes que forman la series se les llama coeficientes de Fourier. Hay varios m&eacute;todos para obtener las series de Fourier, pero del que se le va hablar es el de exponencial compleja. La f&oacute;rmula para obtener la serie mediante la exponencial compleja es la siguiente:</p><p><img src="ASySPrac05LuisQuijano_eq10551444077860476603.png" alt="$$Dn=\frac{1}{T_0} \int_{T_0}x(t)e^{-jnw_0t}dt$$"></p><p><img src="ASySPrac05LuisQuijano_eq12563248650641055814.png" alt="$$=\lim_{T\rightarrow \: 0}\frac{1}{N_0T}\sum_{k=0}^{N_0-1}x(kT)e^{-jnw_0kT}T$"></p><p><img src="ASySPrac05LuisQuijano_eq05778505394516162996.png" alt="$$==\lim_{T\rightarrow \: 0}\frac{1}{N_0}\sum_{k=0}^{N_0-1}x(kT)e^{-jn\Omega_0k}$"></p><p>en donde <img src="ASySPrac05LuisQuijano_eq04107762638617212561.png" alt="$$x(kT)$">$ es la k-&eacute;sima muestra de <img src="ASySPrac05LuisQuijano_eq06787901769351252476.png" alt="$$x(t)$">, <img src="ASySPrac05LuisQuijano_eq12514996137715364120.png" alt="$$N_0=\frac{T}{T_0}$"> y <img src="ASySPrac05LuisQuijano_eq02593890902192394091.png" alt="$$\Omega_0 = \omega_0T = \frac{2\pi}{N_0}$"></p><p>Entonces, para obtener los valores de los coeficientes <img src="ASySPrac05LuisQuijano_eq16061515346372283040.png" alt="$$D_n$"> se requiere que <img src="ASySPrac05LuisQuijano_eq15236759792872083870.png" alt="$$ T \rightarrow \: 0$">, pero eso en la pr&aacute;ctica no es posible, entonces lo que se hace es hacer que <img src="ASySPrac05LuisQuijano_eq02589007036273142695.png" alt="$$T$"> sea un n&uacute;mero tan peque&ntilde;o, sin ser cero, que no altere la f&oacute;rmula y as&iacute; poder determinar el comportamiento como si <img src="ASySPrac05LuisQuijano_eq02589007036273142695.png" alt="$$T$"> fuese cero. Quedando la sigueinte f&oacute;rmula:</p><p><img src="ASySPrac05LuisQuijano_eq12958854231673220056.png" alt="$$D_n=\frac{1}{N_0}\sum_{k=0}^{N_0-1}x(kT)e^{-jn\Omega_0k}$"></p><h2 id="3">Problema 1</h2><div><ul><li><tt>Serie de Fourier con 4 arm&oacute;nicos</tt> *</li></ul></div><p><img vspace="5" hspace="5" src="problema11.png" alt=""> </p><div><ul><li><tt>Serie de Fourier con 15 arm&oacute;nicos</tt> *</li></ul></div><p><img vspace="5" hspace="5" src="problema12.png" alt=""> </p><h2 id="4">Problema 2</h2><div><ul><li><tt>Serie de Fourier con 4 arm&oacute;nicos</tt> *</li></ul></div><p><img vspace="5" hspace="5" src="problema2.png" alt=""> </p><div><ul><li><tt>Serie de Fourier con 15 arm&oacute;nicos</tt> *</li></ul></div><p><img vspace="5" hspace="5" src="problema2_2.png" alt=""> </p><h2 id="5">Problema 3</h2><div><ul><li><tt>Serie de Fourier con 4 arm&oacute;nicos</tt> *</li></ul></div><p><img vspace="5" hspace="5" src="problema3.png" alt=""> </p><div><ul><li><tt>Serie de Fourier con 15 arm&oacute;nicos</tt> *</li></ul></div><p><img vspace="5" hspace="5" src="problema3_2.png" alt=""> </p><h2 id="6">Problema 4</h2><div><ul><li><tt>Serie de Fourier con 4 arm&oacute;nicos</tt> *</li></ul></div><p><img vspace="5" hspace="5" src="problema1.png" alt=""> </p><div><ul><li><tt>Serie de Fourier con 15 arm&oacute;nicos</tt> *</li></ul></div><p><img vspace="5" hspace="5" src="problema1_2.png" alt=""> </p><h2 id="7">Problema 5</h2><div><ul><li><tt>Serie de Fourier con 4 arm&oacute;nicos</tt> *</li></ul></div><p><img vspace="5" hspace="5" src="problema51.png" alt=""> </p><div><ul><li><tt>Serie de Fourier con 15 arm&oacute;nicos</tt> *</li></ul></div><p><img vspace="5" hspace="5" src="problema5.png" alt=""> </p><h2 id="8">Problema 6</h2><h2 id="9">Problema 7</h2><p><img vspace="5" hspace="5" src="problema7.png" alt=""> </p><p><img vspace="5" hspace="5" src="problema7_2.png" alt=""> </p><h2 id="10">Referencias</h2><p>Lathi, B. P., (2005). Linear Systems and Signals. EUA: Oxford university Press</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Práctica 5: Series de Fourier en tiempo continuo
+% Quijano Gutiérrez Luis Humberto
+%
+%% Objetivos
+% * Realizar gráficas de series de Fourier exponenciales y trigonométricas en tiempo continuo
+% * Manipulación de instrucciones en MATLAB
+% * Calculo númerico de los coeficientes de Fourier
+%
+%% Introducción
+% Las series de Fourier son una forma de representar señales y/o fórumas en
+% una serie infinita de combinciones líneales de esta. A los componentes
+% que forman la series se les llama coeficientes de Fourier. Hay varios
+% métodos para obtener las series de Fourier, pero del que se le va hablar
+% es el de exponencial compleja. La fórmula para obtener la serie mediante
+% la exponencial compleja es la siguiente:
+% 
+% 
+% $$Dn=\frac{1}{T_0} \int_{T_0}x(t)e^{-jnw_0t}dt$$
+%
+% $$=\lim_{T\rightarrow \:
+% 0}\frac{1}{N_0T}\sum_{k=0}^{N_0-1}x(kT)e^{-jnw_0kT}T$
+%
+% $$==\lim_{T\rightarrow \: 0}\frac{1}{N_0}\sum_{k=0}^{N_0-1}x(kT)e^{-jn\Omega_0k}$
+%
+% en donde $$x(kT)$$ es la k-ésima muestra de $$x(t)$,
+% $$N_0=\frac{T}{T_0}$ y $$\Omega_0 = \omega_0T = \frac{2\pi}{N_0}$
+%
+% Entonces, para obtener los valores de los coeficientes $$D_n$ se requiere
+% que $$ T \rightarrow \: 0$, pero eso en la práctica no es posible,
+% entonces lo que se hace es hacer que $$T$ sea un número tan pequeño, sin
+% ser cero, que no altere la fórmula y así poder determinar el
+% comportamiento como si $$T$ fuese cero. Quedando la sigueinte fórmula:
+%
+% $$D_n=\frac{1}{N_0}\sum_{k=0}^{N_0-1}x(kT)e^{-jn\Omega_0k}$
+% 
+% 
+%% Problema 1 
+%
+% * |Serie de Fourier con 4 armónicos| *
+%
+% <<problema11.png>>
+%
+% * |Serie de Fourier con 15 armónicos| *
+%
+% <<problema12.png>>
+%
+%% Problema 2
+%
+% * |Serie de Fourier con 4 armónicos| *
+%
+% <<problema2.png>>
+%
+% * |Serie de Fourier con 15 armónicos| *
+%
+% <<problema2_2.png>>
+%
+%% Problema 3
+%
+% * |Serie de Fourier con 4 armónicos| *
+%
+% <<problema3.png>>
+%
+% * |Serie de Fourier con 15 armónicos| *
+%
+% <<problema3_2.png>>
+%
+%% Problema 4
+%
+% * |Serie de Fourier con 4 armónicos| *
+%
+% <<problema1.png>>
+%
+% * |Serie de Fourier con 15 armónicos| *
+%
+% <<problema1_2.png>>
+%
+%% Problema 5
+%
+% * |Serie de Fourier con 4 armónicos| *
+%
+% <<problema51.png>>
+%
+% * |Serie de Fourier con 15 armónicos| *
+%
+% <<problema5.png>>
+%
+%% Problema 6
+%
+%% Problema 7
+% 
+% <<problema7.png>>
+%
+% <<problema7_2.png>>
+%
+%% Referencias
+% Lathi, B. P., (2005). Linear Systems and Signals. EUA: Oxford university Press
+%
+##### SOURCE END #####
+--></body></html>
