@@ -1,5 +1,6 @@
 %% Práctica 6: Sistemas Diferenciales y en diferencias
 % Quijano Gutiérrez Luis Humberto
+%
 % Zárate Murillo Jose Antonio
 %
 %% Problema 1
