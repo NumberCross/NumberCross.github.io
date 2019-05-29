@@ -1,0 +1,606 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Pr&aacute;ctica 6: Sistemas Diferenciales y en diferencias</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-05-28"><meta name="DC.source" content="ASySPrac06LuisQuijano.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Pr&aacute;ctica 6: Sistemas Diferenciales y en diferencias</h1><!--introduction--><p>Quijano Guti&eacute;rrez Luis Humberto Z&aacute;rate Murillo Jose Antonio</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Problema 1</a></li><li><a href="#2">Problema 2</a></li><li><a href="#3">Problema 3</a></li><li><a href="#4">Problema 4</a></li><li><a href="#5">Problema 5</a></li><li><a href="#6">Problema 6</a></li><li><a href="#7">Problema 7</a></li><li><a href="#8">Problema 8</a></li><li><a href="#9">Problema 9</a></li><li><a href="#10">Problema 10</a></li><li><a href="#11">Problema 11</a></li><li><a href="#12">Problema 12</a></li><li><a href="#13">Problema 13</a></li><li><a href="#14">Problema 14</a></li><li><a href="#15">Referencias</a></li></ul></div><h2 id="1">Problema 1</h2><pre class="language-matlab">
+<span class="keyword">function</span> [Hs] = FdeTransferencia(a,b,ciy,cix,xi)
+close <span class="string">all</span>
+tam=size(a);
+tami=size(b);
+syms <span class="string">Y(s)</span> <span class="string">X(s)</span> <span class="string">Yy</span> <span class="string">Ys</span> <span class="string">Xs</span> <span class="string">H(s)</span>;
+syms <span class="string">edd</span> <span class="string">edi</span> 
+edd=0;
+edi=0;
+
+<span class="keyword">for</span> i=1:tam(2)
+   edd=edd+a(i)*s^(i-1)*Y(s);
+   <span class="keyword">for</span> k=1:i-1
+       edd=edd-a(i)*(s^(i-1-k)*ciy(k));
+   <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> i=1:tami(2)
+   edi=edi+b(i)*s^(i-1)*X(s);
+   <span class="keyword">for</span> k=1:i-1
+       edi=edi-b(i)*(s^(i-1-k)*cix(k));
+   <span class="keyword">end</span>
+<span class="keyword">end</span>
+edi=subs(edi,X(s), laplace(xi));
+edd=collect(edd,Y(s));
+edd=subs(edd,Y(s),Yy);
+eq1=edd==edi;
+edd=solve(eq1, Yy);
+Ys=partfrac(edd);
+Xs=laplace(xi);
+Hs=simplify(Ys/Xs);
+<span class="keyword">end</span>
+
+</pre><pre class="codeinput">syms <span class="string">t</span>;
+FdeTransferencia([2 2 1],[2 1],[1 1],[0],exp(-t).*heaviside(t))
+</pre><pre class="codeoutput"> 
+ans =
+ 
+(s^2 + 5*s + 5)/(s^2 + 2*s + 2)
+ 
+</pre><h2 id="2">Problema 2</h2><pre class="language-matlab">
+<span class="keyword">function</span> [ht] = RespImpulso(a,b,ciy,cix,xi)
+syms  <span class="string">Hs</span>;
+Hs=FdeTransferencia(a,b,ciy,cix,xi);
+ht= ilaplace(Hs);
+fplot(ht,[0, 5],<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,2)
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta al Impulso'</span>)
+<span class="keyword">end</span>
+
+
+</pre><pre class="codeinput">syms <span class="string">t</span>;
+RespImpulso([2 2 1],[2 1],[1 1],[0],exp(-t).*heaviside(t))
+</pre><pre class="codeoutput"> 
+ans =
+ 
+dirac(t) + 3*exp(-t)*cos(t)
+ 
+</pre><img vspace="5" hspace="5" src="ASySPrac06LuisQuijano_01.png" alt=""> <h2 id="3">Problema 3</h2><pre class="language-matlab">
+<span class="keyword">function</span> [ Respuesta_0 ] = R_entrada00(a,ciy)
+close <span class="string">all</span>
+tam=size(a);
+syms <span class="string">y(t)</span> <span class="string">Y(s)</span> <span class="string">Yy</span>;
+syms <span class="string">edd</span>; 
+edd=0;
+
+
+<span class="keyword">for</span> i=1:tam(2)
+   edd=edd+a(i)*s^(i-1)*Y(s);
+   <span class="keyword">for</span> k=1:i-1
+       edd=edd-a(i)*(s^(i-1-k)*ciy(k));
+   <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+edd=collect(edd,Y(s));
+edd=subs(edd,Y(s),Yy);
+eq1=edd==0;
+edd=solve(eq1, Yy);
+Respuesta_0=ilaplace(edd);
+fplot(Respuesta_0,[0, 5],<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,2)
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta a entrada cero'</span>)
+<span class="keyword">end</span>
+
+
+</pre><pre class="codeinput">syms <span class="string">t</span>;
+R_entrada00([2 2 1],[0 1])
+</pre><pre class="codeoutput"> 
+ans =
+ 
+exp(-t)*sin(t)
+ 
+</pre><img vspace="5" hspace="5" src="ASySPrac06LuisQuijano_02.png" alt=""> <h2 id="4">Problema 4</h2><pre class="language-matlab">
+<span class="keyword">function</span> [ Respuesta_Estado0 ] = R_estado00(a,b,xi)
+close <span class="string">all</span>
+tam=size(a);
+tami=size(b);
+syms <span class="string">y(t)</span> <span class="string">Y(s)</span> <span class="string">X(s)</span> <span class="string">Yy</span>;
+syms <span class="string">edd</span> <span class="string">edi</span> 
+edd=0;
+edi=0;
+
+<span class="keyword">for</span> i=1:tam(2)
+   edd=edd+a(i)*s^(i-1)*Y(s);
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> i=1:tami(2)
+   edi=edi+b(i)*s^(i-1)*X(s);
+<span class="keyword">end</span>
+edi=subs(edi,X(s), laplace(xi));
+edd=collect(edd,Y(s));
+edd=subs(edd,Y(s),Yy);
+eq1=edd==edi;
+edd=solve(eq1, Yy);
+Respuesta_Estado0=ilaplace(edd);
+fplot(Respuesta_Estado0,[0, 5],<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,2)
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta a estado cero'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+<span class="keyword">end</span>
+
+
+
+
+
+
+
+
+
+</pre><pre class="codeinput">syms <span class="string">t</span>;
+R_estado00([2 2 1],[2 1],exp(-t).*heaviside(t))
+</pre><pre class="codeoutput"> 
+ans =
+ 
+exp(-t) - exp(-t)*(cos(t) - sin(t))
+ 
+</pre><img vspace="5" hspace="5" src="ASySPrac06LuisQuijano_03.png" alt=""> <h2 id="5">Problema 5</h2><pre class="language-matlab">
+<span class="keyword">function</span> [Respuesta_Total] = R_total(a,b,ciy,xi)
+
+Respuesta_Total=R_entrada00(a,ciy)+R_estado00(a,b,xi);
+fplot(Respuesta_Total,[0, 5],<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,2)
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta Total'</span>)
+<span class="keyword">end</span>
+
+
+
+</pre><pre class="codeinput">syms <span class="string">t</span>;
+R_total([2 2 1],[2 1],[0 1],exp(-t).*heaviside(t))
+</pre><pre class="codeoutput"> 
+ans =
+ 
+exp(-t) - exp(-t)*(cos(t) - sin(t)) + exp(-t)*sin(t)
+ 
+</pre><img vspace="5" hspace="5" src="ASySPrac06LuisQuijano_04.png" alt=""> <h2 id="6">Problema 6</h2><pre class="codeinput">clc
+clear <span class="string">all</span>
+close <span class="string">all</span>
+
+s=tf(<span class="string">'s'</span>)
+g=(2*s^4+12*s^3+21*s^2+21*s+12)/(s^5+3*s^4+6*s^3+8*s^2+8*s+4)
+t=0:0.01:10;
+step(g,t)
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta al escalon'</span>)
+</pre><pre class="codeoutput">
+s =
+ 
+  s
+ 
+Continuous-time transfer function.
+
+
+g =
+ 
+   2 s^4 + 12 s^3 + 21 s^2 + 21 s + 12
+  -------------------------------------
+  s^5 + 3 s^4 + 6 s^3 + 8 s^2 + 8 s + 4
+ 
+Continuous-time transfer function.
+
+</pre><img vspace="5" hspace="5" src="ASySPrac06LuisQuijano_05.png" alt=""> <h2 id="7">Problema 7</h2><pre class="language-matlab">
+syms <span class="string">t</span>;
+a=RespImpulso([2 2 1],[2 1],[1 1],[0],exp(-t).*heaviside(t));
+b=R_entrada00([2 2 1],[0 1]);
+c=R_estado00([2 2 1],[2 1],exp(-t).*heaviside(t));
+d=R_total([2 2 1],[2 1],[0 1],exp(-t).*heaviside(t));
+
+s=tf(<span class="string">'s'</span>);
+g=(2*s^4+12*s^3+21*s^2+21*s+12)/(s^5+3*s^4+6*s^3+8*s^2+8*s+4);
+t=0:0.01:10;
+
+subplot(3,2,1)
+fplot(a,[0, 5],<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,2); grid <span class="string">on</span>;
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta al Impulso'</span>)
+subplot(3,2,2)
+fplot(b,[0, 5],<span class="string">'r'</span>,<span class="string">'LineWidth'</span>,2); grid <span class="string">on</span>;
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta a entrada cero'</span>)
+subplot(3,2,3)
+fplot(c,[0, 5],<span class="string">'y'</span>,<span class="string">'LineWidth'</span>,2); grid <span class="string">on</span>;
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta a estado cero'</span>)
+subplot(3,2,4)
+fplot(d,[0, 5],<span class="string">'g'</span>,<span class="string">'LineWidth'</span>,2); grid <span class="string">on</span>;
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta total'</span>)
+subplot(3,2,[5 6])
+step(g,t); grid <span class="string">on</span>;
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta al escalon con condiciones iniciales 0'</span>)
+
+</pre><p><img vspace="5" hspace="5" src="parte17.png" alt=""> </p><h2 id="8">Problema 8</h2><pre class="language-matlab">
+<span class="keyword">function</span> [Hz] = FdeTransferenciaDis(a,b,ciy,cix,xi)
+close <span class="string">all</span>
+tam=size(a);
+tami=size(b);
+syms <span class="string">y(n)</span> <span class="string">n</span> <span class="string">z</span> <span class="string">Y(z)</span> <span class="string">x(n)</span> <span class="string">X(z)</span> <span class="string">Yy</span> <span class="string">fp</span>;
+syms <span class="string">edd</span> <span class="string">edi</span>
+edd=0;
+edi=0;
+
+<span class="keyword">for</span> i=1:tam(2)
+   yd(i)=y(n+tam(2)-i);
+   edd=edd+ a(i)*ztrans(yd(i));   
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> i=1:tami(2)
+   xd(i)=x(n+tami(2)-i);
+   edi=edi+ b(i)*ztrans(xd(i));   
+<span class="keyword">end</span>
+
+edd=subs(edd,ztrans(y(n),n,z), Y(z));
+edi=subs(edi,ztrans(x(n),n,z), X(z));
+
+<span class="keyword">for</span> j=1:tami(2)-1
+edi=subs(edi,x(tami(2)-1-j),cix(j));
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> j=1:tam(2)-1
+edd=subs(edd,y(tam(2)-1-j),ciy(j));
+<span class="keyword">end</span>
+
+edi=subs(edi,X(z), ztrans(xi));
+edd=collect(edd,Y(z));
+edd=subs(edd,Y(z),Yy);
+eq1=edd==edi;
+edd=solve(eq1, Yy);
+Yz=partfrac(edd);
+Xz=ztrans(xi);
+Hz=simplify(Yz/Xz);
+
+<span class="keyword">end</span>
+
+
+</pre><pre class="codeinput">syms <span class="string">n</span>;
+FdeTransferenciaDis([6 5 1],[1 1],[2 1],[0.5],heaviside(n))
+</pre><pre class="codeoutput"> 
+ans =
+ 
+(12*z^3 + 22*z^2 - 31*z + 1)/(6*z^3 + 11*z^2 + 6*z + 1)
+ 
+</pre><h2 id="9">Problema 9</h2><pre class="language-matlab">
+<span class="keyword">function</span> [hn] = RespImpulsoDis(a,b,ciy,cix,xi)
+syms  <span class="string">Hz</span> <span class="string">n</span>;
+Hz=FdeTransferenciaDis(a,b,ciy,cix,xi);
+hn= iztrans(Hz);
+
+
+tiempo=0:1:10;
+stem(tiempo,subs(hn,n,tiempo),<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Respuesta al Impulso '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+<span class="keyword">end</span>
+
+
+</pre><pre class="codeinput">syms <span class="string">n</span>;
+RespImpulsoDis([6 5 1],[1 1],[2 1],[0.5],heaviside(n))
+</pre><pre class="codeoutput"> 
+ans =
+ 
+82*(-1/2)^n - 21*(-1)^n - 60*(-1/3)^n + kroneckerDelta(n, 0)
+ 
+</pre><img vspace="5" hspace="5" src="ASySPrac06LuisQuijano_06.png" alt=""> <h2 id="10">Problema 10</h2><pre class="language-matlab">
+<span class="keyword">function</span> [Respuesta_Entrada0] = R_entrada0Dis(a,ciy)
+close <span class="string">all</span>
+tam=size(a);
+syms <span class="string">y(n)</span> <span class="string">n</span> <span class="string">Y(z)</span> <span class="string">Yy</span>;
+syms <span class="string">edd</span>;
+edd=0;
+
+<span class="keyword">for</span> i=1:tam(2)
+   yd(i)=y(n+tam(2)-i);
+   edd=edd+ a(i)*ztrans(yd(i));   
+<span class="keyword">end</span>
+
+edd=subs(edd,ztrans(y(n),n,z), Y(z));
+
+<span class="keyword">for</span> j=1:tam(2)-1
+edd=subs(edd,y(tam(2)-1-j),ciy(j));
+<span class="keyword">end</span>
+
+edd=collect(edd,Y(z));
+edd=subs(edd,Y(z),Yy);
+eq1=edd==0;
+edd=solve(eq1, Yy);
+Respuesta_Entrada0=simplify(iztrans(edd));
+
+<span class="comment">% figure (1)</span>
+<span class="comment">% hFig = figure(1);</span>
+<span class="comment">% set(hFig, 'Position', [0 0 900 900])</span>
+<span class="comment">% axes1 = axes('Parent',hFig,'FontWeight','bold','FontSize',16);</span>
+tiempo=0:1:10;
+stem(tiempo,subs(Respuesta_Entrada0,n,tiempo),<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,2)
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta a entrada cero'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+
+<span class="keyword">end</span>
+
+
+
+</pre><pre class="codeinput">syms <span class="string">n</span>;
+R_entrada0Dis([6 5 1],[2 0])
+</pre><pre class="codeoutput"> 
+ans =
+ 
+12*(-1/3)^n - 12*(-1/2)^n
+ 
+</pre><img vspace="5" hspace="5" src="ASySPrac06LuisQuijano_07.png" alt=""> <h2 id="11">Problema 11</h2><pre class="language-matlab">
+<span class="keyword">function</span> [Respuesta_Estado0] = R_estado0Dis(a,b,xi)
+close <span class="string">all</span>
+tam=size(a);
+tami=size(b);
+syms <span class="string">y(n)</span> <span class="string">n</span> <span class="string">z</span> <span class="string">Y(z)</span> <span class="string">x(n)</span> <span class="string">X(z)</span> <span class="string">Yy</span> <span class="string">fp</span>;
+syms <span class="string">edd</span> <span class="string">edi</span>
+edd=0;
+edi=0;
+ciy=[0 0];
+cix=[0];
+
+<span class="keyword">for</span> i=1:tam(2)
+   yd(i)=y(n+tam(2)-i);
+   edd=edd+ a(i)*ztrans(yd(i));   
+<span class="keyword">end</span>
+
+
+<span class="keyword">for</span> i=1:tami(2)
+   xd(i)=x(n+tami(2)-i);
+   edi=edi+ b(i)*ztrans(xd(i));   
+<span class="keyword">end</span>
+
+
+edd=subs(edd,ztrans(y(n),n,z), Y(z));
+edi=subs(edi,ztrans(x(n),n,z), X(z));
+
+<span class="keyword">for</span> j=1:tami(2)-1
+edi=subs(edi,x(tami(2)-1-j),cix(j));
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> j=1:tam(2)-1
+edd=subs(edd,y(tam(2)-1-j),ciy(j));
+<span class="keyword">end</span>
+
+edi=subs(edi,X(z), ztrans(xi));
+edd=collect(edd,Y(z));
+edd=subs(edd,Y(z),Yy);
+eq1=edd==edi;
+edd=solve(eq1, Yy);
+h=partfrac(edd);
+Respuesta_Estado0=iztrans(h);
+
+
+
+<span class="comment">% figure (1)</span>
+<span class="comment">% hFig = figure(1);</span>
+<span class="comment">% set(hFig, 'Position', [0 0 900 900])</span>
+<span class="comment">% axes1 = axes('Parent',hFig,'FontWeight','bold','FontSize',16);</span>
+tiempo=0:1:10;
+stem(tiempo,subs(Respuesta_Estado0,n,tiempo),<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,2)
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta a estado cero'</span>)
+
+<span class="keyword">end</span>
+
+
+</pre><pre class="codeinput">syms <span class="string">n</span>;
+R_estado0Dis([6 5 1],[1 1],heaviside(n))
+</pre><pre class="codeoutput"> 
+ans =
+ 
+(-1/3)^n/2 - (-1/2)^n/6 - kroneckerDelta(n, 0)/2 + 1/6
+ 
+</pre><img vspace="5" hspace="5" src="ASySPrac06LuisQuijano_08.png" alt=""> <h2 id="12">Problema 12</h2><pre class="codeinput"><span class="comment">%&lt;include&gt;R_totalDis.m&lt;/include&gt;</span>
+<span class="comment">%</span>
+syms <span class="string">n</span>;
+R_totalDis([6 5 1],[1 1],[2 0],heaviside(n))
+</pre><pre class="codeoutput"> 
+ans =
+ 
+(25*(-1/3)^n)/2 - (73*(-1/2)^n)/6 - kroneckerDelta(n, 0)/2 + 1/6
+ 
+</pre><img vspace="5" hspace="5" src="ASySPrac06LuisQuijano_09.png" alt=""> <h2 id="13">Problema 13</h2><pre class="codeinput">clc
+clear <span class="string">all</span>
+close <span class="string">all</span>
+
+N=[12 22 -31 1];
+D=[-12 2  8  2];
+[Nz,Dz]=c2dm(N,D,1,<span class="string">'zoh'</span>);
+y=dstep(Nz,Dz);
+plot(y,<span class="string">'.'</span>)
+grid <span class="string">on</span>;
+</pre><img vspace="5" hspace="5" src="ASySPrac06LuisQuijano_10.png" alt=""> <h2 id="14">Problema 14</h2><pre class="language-matlab">
+syms <span class="string">n</span>;
+tiempo=0:1:10;
+
+a=RespImpulsoDis([6 5 1],[1 1],[2 1],[0.5],heaviside(n));
+b=R_entrada0Dis([6 5 1],[2 0]);
+c=R_estado0Dis([6 5 1],[1 1],heaviside(n));
+d=R_totalDis([6 5 1],[1 1],[2 0],heaviside(n));
+
+N=[12 22 -31 1];
+D=[-12 2  8  2];
+[Nz,Dz]=c2dm(N,D,1,<span class="string">'zoh'</span>);
+y=dstep(Nz,Dz);
+
+
+subplot(3,2,1)
+stem(tiempo,subs(a,n,tiempo),<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,2); grid <span class="string">on</span>;
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta al Impulso'</span>)
+subplot(3,2,2)
+stem(tiempo,subs(b,n,tiempo),<span class="string">'r'</span>,<span class="string">'LineWidth'</span>,2); grid <span class="string">on</span>;
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta a entrada cero'</span>)
+subplot(3,2,3)
+stem(tiempo,subs(c,n,tiempo),<span class="string">'y'</span>,<span class="string">'LineWidth'</span>,2); grid <span class="string">on</span>;
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta a estado cero'</span>)
+subplot(3,2,4)
+stem(tiempo,subs(d,n,tiempo),<span class="string">'g'</span>,<span class="string">'LineWidth'</span>,2); grid <span class="string">on</span>;
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta total'</span>)
+subplot(3,2,[5 6])
+plot(y,<span class="string">'.'</span>); grid <span class="string">on</span>;
+xlabel(<span class="string">'tiempo'</span>)
+title(<span class="string">'Respuesta al escalon con condiciones iniciales 0'</span>)
+
+</pre><p><img vspace="5" hspace="5" src="parte27.png" alt=""> </p><h2 id="15">Referencias</h2><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Práctica 6: Sistemas Diferenciales y en diferencias
+% Quijano Gutiérrez Luis Humberto
+% Zárate Murillo Jose Antonio
+%
+%% Problema 1
+% <include>FdeTransferencia.m</include>
+%
+syms t;
+FdeTransferencia([2 2 1],[2 1],[1 1],[0],exp(-t).*heaviside(t))
+%% Problema 2
+% <include>RespImpulso.m</include>
+%
+syms t;
+RespImpulso([2 2 1],[2 1],[1 1],[0],exp(-t).*heaviside(t))
+%% Problema 3
+% <include>R_entrada00.m</include>
+%
+syms t;
+R_entrada00([2 2 1],[0 1])
+%% Problema 4
+% <include>R_estado00.m</include>
+%
+syms t;
+R_estado00([2 2 1],[2 1],exp(-t).*heaviside(t))
+%% Problema 5
+% <include>R_total.m</include>
+%
+syms t;
+R_total([2 2 1],[2 1],[0 1],exp(-t).*heaviside(t))
+%% Problema 6
+clc
+clear all
+close all
+
+s=tf('s')
+g=(2*s^4+12*s^3+21*s^2+21*s+12)/(s^5+3*s^4+6*s^3+8*s^2+8*s+4)
+t=0:0.01:10;
+step(g,t)
+xlabel('tiempo')
+title('Respuesta al escalon')
+%% Problema 7
+% <include>parte1_7.m</include>
+%
+% <<parte17.png>>
+%
+%% Problema 8
+% <include>FdeTransferenciaDis.m</include>
+%
+syms n;
+FdeTransferenciaDis([6 5 1],[1 1],[2 1],[0.5],heaviside(n))
+%% Problema 9
+% <include>RespImpulsoDis.m</include>
+%
+syms n;
+RespImpulsoDis([6 5 1],[1 1],[2 1],[0.5],heaviside(n))
+%% Problema 10
+% <include>R_entrada0Dis.m</include>
+%
+syms n;
+R_entrada0Dis([6 5 1],[2 0])
+%% Problema 11
+% <include>R_estado0Dis.m</include>
+%
+syms n;
+R_estado0Dis([6 5 1],[1 1],heaviside(n))
+%% Problema 12
+%<include>R_totalDis.m</include>
+%
+syms n;
+R_totalDis([6 5 1],[1 1],[2 0],heaviside(n))
+%% Problema 13
+clc
+clear all
+close all
+
+N=[12 22 -31 1];
+D=[-12 2  8  2];
+[Nz,Dz]=c2dm(N,D,1,'zoh');
+y=dstep(Nz,Dz);
+plot(y,'.')
+grid on;
+%% Problema 14
+% <include>parte2_7.m</include>
+%
+% <<parte27.png>>
+%
+%% Referencias
+% 
+##### SOURCE END #####
+--></body></html>
